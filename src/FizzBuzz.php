@@ -2,19 +2,15 @@
 
 class FizzBuzz
 {
-    protected static $FIZZ_VALUE = 3;
-    protected static $BUZZ_VALUE = 5;
-    protected static $FIZZ_TEXT = 'Fizz';
-    protected static $BUZZ_TEXT = 'Buzz';
+    protected static $VALUE_TEXT = array(3 => 'Fizz', 5 => 'Buzz', 7 => 'Bang');
 
     public static function process($data)
     {
         $value = '';
-        if (self::isFizz($data) || self::isBuzz($data)) {
-            if (self::isFizz($data))
-                $value .= self::$FIZZ_TEXT;
-            if (self::isBuzz($data))
-                $value .= self::$BUZZ_TEXT;
+        if (self::isNotNumber($data)) {
+            foreach (self::$VALUE_TEXT as $k => $v)
+                if (self::is($data, $k))
+                    $value .= $v;
         } else {
             $value .= $data;
         }
@@ -26,13 +22,21 @@ class FizzBuzz
         return ($data % $by === 0);
     }
 
-    private static function isFizz($data)
+    private static function contains($data, $value)
     {
-        return self::isDivisible($data, self::$FIZZ_VALUE);
+        return false !== strpos(strval($data), strval($value));
     }
 
-    private static function isBuzz($data)
+    private static function is($data, $value)
     {
-        return self::isDivisible($data, self::$BUZZ_VALUE);
+        return self::isDivisible($data, $value) || self::contains($data, $value);
+    }
+
+    private static function isNotNumber($data)
+    {
+        foreach (self::$VALUE_TEXT as $k => $v)
+            if (self::is($data, $k))
+                return true;
+        return false;
     }
 }
