@@ -8,7 +8,7 @@ class FizzBuzz
     {
         $value = '';
         if (self::isNotNumber($data)) {
-            foreach (self::$VALUE_TEXT as $k => $v)
+            foreach (static::$VALUE_TEXT as $k => $v)
                 if (self::is($data, $k))
                     $value .= $v;
         } else {
@@ -34,7 +34,7 @@ class FizzBuzz
 
     private static function isNotNumber($data)
     {
-        foreach (self::$VALUE_TEXT as $k => $v)
+        foreach (static::$VALUE_TEXT as $k => $v)
             if (self::is($data, $k))
                 return true;
         return false;
