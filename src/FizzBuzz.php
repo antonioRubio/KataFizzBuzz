@@ -4,6 +4,11 @@ class FizzBuzz
 {
     protected static $VALUE_TEXT = array(3 => 'Fizz', 5 => 'Buzz', 7 => 'Bang');
 
+    public static function setValueText($valueText)
+    {
+        static::$VALUE_TEXT = $valueText;
+    }
+
     public static function process($data)
     {
         $value = '';
