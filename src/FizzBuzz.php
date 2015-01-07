@@ -2,18 +2,19 @@
 
 class FizzBuzz
 {
-    protected static $VALUE_TEXT = array(3 => 'Fizz', 5 => 'Buzz', 7 => 'Bang');
+    private $valueText = array(3 => 'Fizz', 5 => 'Buzz', 7 => 'Bang');
 
-    public static function setValueText($valueText)
+    public function setValueText($valueText)
     {
-        static::$VALUE_TEXT = $valueText;
+        if (is_array($valueText))
+            $this->valueText = $valueText;
     }
 
-    public static function process($data)
+    public function process($data)
     {
         $value = '';
-        if (self::isNotNumber($data)) {
-            foreach (static::$VALUE_TEXT as $k => $v)
+        if (self::isNotNumber($data, $this->valueText)) {
+            foreach ($this->valueText as $k => $v)
                 if (self::is($data, $k))
                     $value .= $v;
         } else {
@@ -37,9 +38,9 @@ class FizzBuzz
         return self::isDivisible($data, $value) || self::contains($data, $value);
     }
 
-    private static function isNotNumber($data)
+    private static function isNotNumber($data, $valueText)
     {
-        foreach (static::$VALUE_TEXT as $k => $v)
+        foreach ($valueText as $k => $v)
             if (self::is($data, $k))
                 return true;
         return false;

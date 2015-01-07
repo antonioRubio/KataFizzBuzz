@@ -2,43 +2,47 @@
 
 class UnssWerrKinnTest extends PHPUnit_Framework_TestCase
 {
+    private static $valueText = array(8 => 'Unss', 4 => 'Werr', 5 => 'Kinn');
+    protected $fb;
+
     public function setUp()
     {
-        FizzBuzz::setValueText(array(8 => 'Unss', 4 => 'Werr', 5 => 'Kinn'));
+        $this->fb = new FizzBuzz();
+        $this->fb->setValueText(static::$valueText);
     }
+
     public function testAssert()
     {
-        $uwk = new FizzBuzz();
-        $this->assertInstanceOf('FizzBuzz', $uwk);
+        $this->assertInstanceOf('FizzBuzz', $this->fb);
     }
 
     public function testOne()
     {
         $data = 1;
-        $this->assertEquals('1', FizzBuzz::process($data));
+        $this->assertEquals('1', $this->fb->process($data));
     }
 
     public function testWerr()
     {
         $data = 4;
-        $this->assertEquals('Werr', FizzBuzz::process($data));
+        $this->assertEquals('Werr', $this->fb->process($data));
     }
 
     public function testUnssWerr()
     {
         $data = 8;
-        $this->assertEquals('UnssWerr', FizzBuzz::process($data));
+        $this->assertEquals('UnssWerr', $this->fb->process($data));
     }
 
     public function testUnssWerrKinn()
     {
         $data = 40;
-        $this->assertEquals('UnssWerrKinn', FizzBuzz::process($data));
+        $this->assertEquals('UnssWerrKinn', $this->fb->process($data));
     }
 
     public function testUnssWerrKinn2()
     {
         $data = 160;
-        $this->assertEquals('UnssWerrKinn', FizzBuzz::process($data));
+        $this->assertEquals('UnssWerrKinn', $this->fb->process($data));
     }
 }
